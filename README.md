@@ -2,7 +2,7 @@
 
 A new Flutter application.
 
-## Getting Started
+## Insights of the App
 
 The app includes various features like HTTP requests, having an established communication between the App and the Server. 
 The Json data is decoded and the necessary items are displayed using various Packages, Widgets etc like IntroSlider, ListViews, SppedDial etc
