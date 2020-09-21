@@ -7,8 +7,7 @@ A new Flutter application.
 The app includes various features like HTTP requests, having an established communication between the App and the Server. 
 The Json data is decoded and the necessary items are displayed using various Packages, Widgets etc like IntroSlider, ListViews, SppedDial etc
 
-This project is a starting point for a Flutter application.
-
+For Folks who are interested in App dev: 
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
