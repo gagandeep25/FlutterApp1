@@ -1,6 +1,7 @@
 # ACM1
 
 A new Flutter application.
+By Santosh Gudlavalleti, Sophomore - B.Tech Electrical Engineering, IIT Madras
 
 ## Insights of the App
 
