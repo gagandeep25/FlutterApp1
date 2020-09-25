@@ -12,7 +12,7 @@ class MenuService {
   static const API = 'https://acmg90.herokuapp.com/v1/graphql';
   var headers = {
     'content-type': 'application/json',
-    'x-hasura-admin-secret': '*****'
+    'x-hasura-admin-secret': 'acmcfi'
   };
 
   Future<APIResponse<List<BinListing>>> getBinList() {
