@@ -5,8 +5,8 @@ By Santosh Gudlavalleti, Sophomore - B.Tech Electrical Engineering, IIT Madras
 
 ## Insights of the App
 
-The app includes various features like HTTP requests, having an established communication between the App and the Server. 
-The Json data is decoded and the necessary items are displayed using various Packages, Widgets etc like IntroSlider, ListViews, SpeedDial etc
+The app includes various features like HTTP requests, API calls etc while having an established communication between the App and the Server. 
+The Json data is decoded and the necessary items are displayed using various Packages, Widgets etc like GridView, IntroSlider, ListViews, SpeedDial etc
 
 PS: Do not try to run the code directly, The secret-Key(Password) is not available and hence will pop up errors
 
