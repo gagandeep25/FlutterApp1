@@ -13,6 +13,11 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 
 class MenuList extends StatefulWidget {
+  int ind;
+  //final String menuTitle;
+
+  MenuList({this.ind});
+
   @override
   _MenuListState createState() => _MenuListState();
 }
@@ -30,9 +35,9 @@ class _MenuListState extends State<MenuList> {
     'images/mixveg.png',
     'images/palpan.png',
     'images/dalmak.png',
-    'images/ricekhe.png',
+    'images/tomsoup.png',
     'images/jeerice.png',
-    'images/tomsoup.png'
+    'images/ricekhe.png',
   ];
 
   @override
@@ -52,11 +57,11 @@ class _MenuListState extends State<MenuList> {
       count = _menuResponse.data.length;
     });
 
-    for (int i = 0; i < count; i++) {
+    for (int i = widget.ind; i == widget.ind; i++) {
       slides.add(
         new Slide(
           title: _menuResponse.data[i].menuTitle,
-          description: "Good, Healthy, Tasty",
+          description: "Good, Healthy, Tasty \n Time : 10 min",
           pathImage: images[i],
           marginDescription:
               EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
@@ -80,13 +85,14 @@ class _MenuListState extends State<MenuList> {
     showDialog(
         context: context,
         builder: (_) => ChooseAction(
-            menuID: _menuResponse.data[a].menuID,
-            menuTitle: _menuResponse.data[a].menuTitle));
+            menuID: _menuResponse.data[widget.ind].menuID,
+            menuTitle: _menuResponse.data[widget.ind].menuTitle));
   }
 
   void onTabChangeCompleted(index) {
     setState(() {
       a = index;
+      widget.ind = widget.ind + index;
     });
   }
 
@@ -160,7 +166,18 @@ class _MenuListState extends State<MenuList> {
                     showDialog(context: context, builder: (_) => LogOut())),
           ],
         ),
-        body: Builder(builder: (_) {
+        body:
+            /* Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Flexible(
+              child: ()
+              ),
+                          ],
+        )*/
+            Builder(builder: (_) {
           if (_isLoading) {
             return Center(child: CircularProgressIndicator());
           }
@@ -170,11 +187,12 @@ class _MenuListState extends State<MenuList> {
           }
           return IntroSlider(
             slides: this.slides,
-            nameSkipBtn: "Cook",
+            // refFuncGoToTab: this.goToTab,
+            nameSkipBtn: "Coo",
             nameDoneBtn: "Cook",
-            isShowDoneBtn: false,
-            isShowPrevBtn: true,
-            isShowSkipBtn: false,
+            isShowDoneBtn: true,
+            isShowPrevBtn: false,
+            isShowSkipBtn: true,
             nameNextBtn: "Next",
             namePrevBtn: "Previous",
             styleNameSkipBtn: TextStyle(fontSize: 21),

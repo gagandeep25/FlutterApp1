@@ -1,7 +1,7 @@
 import 'package:acm1/alerts/api_response.dart';
 import 'package:acm1/listings/cooked_listing.dart';
 import 'package:acm1/apis/menu_services.dart';
-import 'package:acm1/views/menulist.dart';
+import 'package:acm1/views/gridsview.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -44,7 +44,7 @@ class _CookedState extends State<Cooked> {
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => MenuList()));
+                  .push(MaterialPageRoute(builder: (_) => GridsView()));
             },
             child: Icon(Icons.add)),
         body: Builder(builder: (_) {

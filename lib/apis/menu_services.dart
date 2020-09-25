@@ -15,6 +15,42 @@ class MenuService {
     'x-hasura-admin-secret': 'acmcfi'
   };
 
+  static Future<List<MenuForListing>> getMenu() async {
+    var header = {
+      'content-type': 'application/json',
+      'x-hasura-admin-secret': 'acmcfi'
+    };
+    var sun =
+        '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
+
+    try {
+      final response = await http.post(API, headers: header, body: sun);
+      if (response.statusCode == 200) {
+        // List<MenuForListing> list = parseGrids(response.body);
+
+        final jsonDatas = json.decode(response.body);
+        final note = <MenuForListing>[];
+        for (var items in jsonDatas["data"]["items"]) {
+          note.add(MenuForListing.fromJson(items));
+        }
+        return note;
+        // return list;
+      } else {
+        throw Exception("Error");
+      }
+    } catch (e) {
+      throw Exception("Error");
+    }
+  }
+
+  static List<MenuForListing> parseGrids(String responseBody) {
+    final parsed = json.decode(responseBody);
+    final stuff = parsed["data"]["items"];
+    return stuff
+        .map<MenuForListing>((json) => MenuForListing.fromJson(json))
+        .toList();
+  }
+
   Future<APIResponse<List<BinListing>>> getBinList() {
     var data =
         '{"query":"query MyQuery {\n  bins {\n    Name\n    id\n    Bin_Number\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
@@ -37,7 +73,7 @@ class MenuService {
 
   Future<APIResponse<List<MenuForListing>>> getMenuList() {
     var data =
-        '{"query":"query MyQuery {\n  items {\n    name\n    id\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
+        '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n    imagelocal\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
     return http.post(API, headers: headers, body: data).then((res) {
       if (res.statusCode == 200) {
         final jsonDatas = json.decode(res.body);

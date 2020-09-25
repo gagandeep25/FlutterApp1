@@ -1,4 +1,5 @@
 import 'package:acm1/login/SIGNUP.dart';
+import 'package:acm1/views/gridsview.dart';
 import 'package:acm1/views/menulist.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -33,7 +34,7 @@ class _LoginState extends State<Login> {
     print(stringValue);
     if (stringValue != null) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => MenuList()));
+          context, MaterialPageRoute(builder: (context) => GridsView()));
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:acm1/listings/menu_insert.dart';
 import 'package:acm1/apis/menu_services.dart';
+import 'package:acm1/views/gridsview.dart';
 import 'package:acm1/views/menulist.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -116,7 +117,7 @@ class _ConfirmActionState extends State<ConfirmAction> {
                                 onPressed: () {
                                   Navigator.of(context).pushAndRemoveUntil(
                                       MaterialPageRoute(
-                                          builder: (context) => MenuList()),
+                                          builder: (context) => GridsView()),
                                       (Route<dynamic> route) => false);
                                 },
                                 child: Text('OK'))
