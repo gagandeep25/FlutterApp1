@@ -18,7 +18,7 @@ class MenuService {
   static Future<List<MenuForListing>> getMenu() async {
     var header = {
       'content-type': 'application/json',
-      'x-hasura-admin-secret': 'acmcfi'
+      'x-hasura-admin-secret': '****'
     };
     var sun =
         '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
