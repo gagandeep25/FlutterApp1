@@ -13,8 +13,7 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 
 class MenuList extends StatefulWidget {
-  int ind;
-  //final String menuTitle;
+  final int ind;
 
   MenuList({this.ind});
 
@@ -92,7 +91,7 @@ class _MenuListState extends State<MenuList> {
   void onTabChangeCompleted(index) {
     setState(() {
       a = index;
-      widget.ind = widget.ind + index;
+      // widget.ind = widget.ind + index;
     });
   }
 
@@ -166,18 +165,7 @@ class _MenuListState extends State<MenuList> {
                     showDialog(context: context, builder: (_) => LogOut())),
           ],
         ),
-        body:
-            /* Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Flexible(
-              child: ()
-              ),
-                          ],
-        )*/
-            Builder(builder: (_) {
+        body: Builder(builder: (_) {
           if (_isLoading) {
             return Center(child: CircularProgressIndicator());
           }
