@@ -35,11 +35,6 @@ class _ChooseActionState extends State<ChooseAction> {
             child: Text('+', style: TextStyle(fontSize: 21)),
             onPressed: () {
               _incrementCouter();
-
-              /*   showDialog(
-                  context: context,
-                  builder: (_) => ConfirmAction(
-                      menuID: widget.menuID, menuTitle: widget.menuTitle)); */
             },
           ),
           FlatButton(
@@ -55,9 +50,9 @@ class _ChooseActionState extends State<ChooseAction> {
                 showDialog(
                     context: context,
                     builder: (_) => ConfirmAction(
-                        menuID: widget.menuID,
-                        menuTitle: widget.menuTitle,
-                        menuportions: _counter));
+                          menuID: widget.menuID,
+                          menuTitle: widget.menuTitle,
+                        ));
               }
               if (_counter < 0) {
                 Navigator.of(context).pop();
