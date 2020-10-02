@@ -12,13 +12,13 @@ class MenuService {
   static const API = 'https://acmg90.herokuapp.com/v1/graphql';
   var headers = {
     'content-type': 'application/json',
-    'x-hasura-admin-secret': '****'
+    'x-hasura-admin-secret': 'acmcfi'
   };
 
   static Future<List<MenuForListing>> getMenu() async {
     var header = {
       'content-type': 'application/json',
-      'x-hasura-admin-secret': '****'
+      'x-hasura-admin-secret': 'acmcfi'
     };
     var sun =
         '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n  }\n}\n","variables":null,"operationName":"MyQuery"}';

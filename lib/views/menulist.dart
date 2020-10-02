@@ -1,5 +1,5 @@
 import 'package:acm1/alerts/api_response.dart';
-import 'package:acm1/alerts/confirm.dart';
+import 'package:acm1/alerts/choose_features.dart';
 import 'package:acm1/alerts/logout.dart';
 import 'package:acm1/listings/menu_listing.dart';
 import 'package:acm1/apis/menu_services.dart';
@@ -83,7 +83,7 @@ class _MenuListState extends State<MenuList> {
   onSkipPress() {
     showDialog(
         context: context,
-        builder: (_) => ConfirmAction(
+        builder: (_) => ChooseFeature(
             menuID: _menuResponse.data[widget.ind].menuID,
             menuTitle: _menuResponse.data[widget.ind].menuTitle));
   }
@@ -102,10 +102,7 @@ class _MenuListState extends State<MenuList> {
           title: Text('Menu'),
           centerTitle: true,
         ),
-        floatingActionButton:
-
-//     FloatingActionButton(onPressed: () => PopupMenuButton) ,
-            SpeedDial(
+        floatingActionButton: SpeedDial(
           marginBottom: 100,
           animatedIcon: AnimatedIcons.menu_close,
           animatedIconTheme: IconThemeData(size: 30.0),
@@ -132,7 +129,7 @@ class _MenuListState extends State<MenuList> {
                 label: 'Cook',
                 labelStyle: TextStyle(fontSize: 21.0),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => ConfirmAction(
+                    builder: (_) => ChooseFeature(
                         menuID: _menuResponse.data[widget.ind].menuID,
                         menuTitle: _menuResponse.data[widget.ind].menuTitle)))),
             SpeedDialChild(

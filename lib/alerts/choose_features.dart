@@ -4,19 +4,19 @@ import 'package:acm1/views/gridsview.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-class ConfirmAction extends StatefulWidget {
+class ChooseFeature extends StatefulWidget {
   final String menuID;
   final String menuTitle;
-  ConfirmAction({
+  ChooseFeature({
     this.menuID,
     this.menuTitle,
   });
 
   @override
-  _ConfirmActionState createState() => _ConfirmActionState();
+  _ChooseFeatureState createState() => _ChooseFeatureState();
 }
 
-class _ConfirmActionState extends State<ConfirmAction> {
+class _ChooseFeatureState extends State<ChooseFeature> {
   int _counter = 1;
 
   void _incrementCouter() {

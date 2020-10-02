@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:acm1/views/gridsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:acm1/views/menulist.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -141,7 +141,7 @@ class _OtpState extends State<Otp> {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MenuList()),
+                                    builder: (context) => GridsView()),
                                 (route) => false);
                           } else if (response["type"] == "failure") {
                             Fluttertoast.showToast(

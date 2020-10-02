@@ -107,20 +107,6 @@ class _BinMapState extends State<BinMap> {
     });
   }
 
-  /* onSkipPress() {
-    showDialog(
-        context: context,
-        builder: (_) => ChooseAction(
-            menuID: _menuResponse.data[a].menuID,
-            menuTitle: _menuResponse.data[a].menuTitle));
-  }
-
-  void onTabChangeCompleted(index) {
-    setState(() {
-      a = index;
-    });
-  }
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

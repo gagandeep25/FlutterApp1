@@ -1,4 +1,4 @@
-import 'package:acm1/alerts/confirm.dart';
+import 'package:acm1/alerts/choose_features.dart';
 import 'package:flutter/material.dart';
 
 class ChooseAction extends StatefulWidget {
@@ -49,7 +49,7 @@ class _ChooseActionState extends State<ChooseAction> {
               if (_counter > 0) {
                 showDialog(
                     context: context,
-                    builder: (_) => ConfirmAction(
+                    builder: (_) => ChooseFeature(
                           menuID: widget.menuID,
                           menuTitle: widget.menuTitle,
                         ));

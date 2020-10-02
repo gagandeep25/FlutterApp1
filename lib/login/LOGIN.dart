@@ -1,6 +1,5 @@
 import 'package:acm1/login/SIGNUP.dart';
 import 'package:acm1/views/gridsview.dart';
-import 'package:acm1/views/menulist.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -220,7 +219,7 @@ class _LoginState extends State<Login> {
                         await SharedPreferences.getInstance();
                     prefs.setString('stringValue', response["auth_token"]);
                     Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => MenuList()));
+                        MaterialPageRoute(builder: (context) => GridsView()));
                   } else if (response["type"] == "failure") {
                     Fluttertoast.showToast(
                         msg: "phonenumber or password is incorrect",
