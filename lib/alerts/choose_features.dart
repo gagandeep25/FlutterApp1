@@ -2,6 +2,7 @@ import 'package:acm1/listings/menu_insert.dart';
 import 'package:acm1/apis/menu_services.dart';
 import 'package:acm1/views/gridsview.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 
 class ChooseFeature extends StatefulWidget {
@@ -18,6 +19,7 @@ class ChooseFeature extends StatefulWidget {
 
 class _ChooseFeatureState extends State<ChooseFeature> {
   int _counter = 1;
+  String _featureA = "Normal";
 
   void _incrementCouter() {
     setState(() {
@@ -29,6 +31,34 @@ class _ChooseFeatureState extends State<ChooseFeature> {
     setState(() {
       _counter--;
     });
+  }
+
+  void _featA(double a) {
+    if (a < 80) {
+      setState(() {
+        _featureA = "Least Spicy";
+      });
+    }
+    if (a > 80 && a < 100) {
+      setState(() {
+        _featureA = "Less Spicy";
+      });
+    }
+    if (a == 100) {
+      setState(() {
+        _featureA = "Normal";
+      });
+    }
+    if (a > 100 && a < 120) {
+      setState(() {
+        _featureA = "Spicy";
+      });
+    }
+    if (a > 120) {
+      setState(() {
+        _featureA = "Extra Spicy";
+      });
+    }
   }
 
   MenuService get menuService => GetIt.I<MenuService>();
@@ -62,7 +92,7 @@ class _ChooseFeatureState extends State<ChooseFeature> {
             SizedBox(height: 30.0),
             Container(
                 width: 600,
-                child: Text("Choose the degree of Feature A",
+                child: Text("Spiciness : $_featureA",
                     style: TextStyle(color: Colors.black, fontSize: 18))),
             Container(
                 width: 600,
@@ -76,17 +106,22 @@ class _ChooseFeatureState extends State<ChooseFeature> {
                     setState(() {
                       _currentSliderValueA = valueA;
                     });
+                    _featA(_currentSliderValueA);
                   },
                   activeColor: Color(0xffff520d),
                   inactiveColor: Colors.grey,
                 )),
             SizedBox(height: 30.0),
             Container(
+              width: 600,
+              child: Container(
                 width: 600,
-                child: Container(
-                    width: 600,
-                    child: Text("Choose the degree of Feature B",
-                        style: TextStyle(color: Colors.black, fontSize: 18)))),
+                child: Text(
+                  "Choose the degree of Feature B",
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                ),
+              ),
+            ),
             Container(
                 width: 600,
                 child: Slider(
@@ -104,7 +139,10 @@ class _ChooseFeatureState extends State<ChooseFeature> {
                   inactiveColor: Colors.grey,
                 )),
             FlatButton(
-              child: Text('OK', style: TextStyle(fontSize: 18)),
+              child: Text(
+                'OK',
+                style: TextStyle(fontSize: 18),
+              ),
               onPressed: () async {
                 if (_counter > 0) {
                   final notes = MenuInsert(
@@ -114,7 +152,6 @@ class _ChooseFeatureState extends State<ChooseFeature> {
                       menufeat: _currentSliderValueA);
 
                   final result = await menuService.createOrder(notes);
-
                   final title = 'Done';
                   final text = result.error
                       ? (result.errorMessage ?? 'An error has hfwubv occured')
@@ -141,8 +178,15 @@ class _ChooseFeatureState extends State<ChooseFeature> {
                     }
                   });
                 }
-                if (_counter < 0) {
-                  Navigator.of(context).pop();
+                if (_counter < 1) {
+                  Fluttertoast.showToast(
+                      msg: "Portions can't be negative",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 2,
+                      backgroundColor: Colors.grey[800],
+                      textColor: Colors.lightBlue,
+                      fontSize: 14.0);
                 }
               },
             ),
