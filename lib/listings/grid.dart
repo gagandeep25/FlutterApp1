@@ -27,21 +27,43 @@ class Grid extends StatelessWidget {
                   child: FadeInImage.assetNetwork(
                     placeholder: "images/mixveg.png",
                     image: "${cell.menuImg}",
-                    width: 300,
-                    height: 180,
+                    width: 600,
+                    height: 360,
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(10.0),
                 child: Text(
                   cell.menuTitle,
                   maxLines: 2,
                   softWrap: true,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500),
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                        "Rating: 5",
+                        softWrap: true,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500),
+                      ),
+                    Padding(padding: EdgeInsets.fromLTRB(0, 0, 4.0, 0),),
+                    Icon(Icons.star, color: Colors.amber, size: 25.0,),
+                  ],
+                ),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Text("Button"),
+                textColor: Colors.black,
+                color: Colors.white,
+              ),
             ],
           ),
         ));
