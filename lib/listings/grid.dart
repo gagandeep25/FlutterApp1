@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:share/share.dart';
 import 'menu_listing.dart';
 
 class Grid extends StatelessWidget {
@@ -7,13 +8,18 @@ class Grid extends StatelessWidget {
   @required
   final MenuForListing cell;
 
+  double rateConvert(int rating){
+    double x = rating.toDouble();
+    return x/2;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.blue[300],
+        color: Colors.white,
         child: Container(
           alignment: Alignment.center,
           child: Column(
@@ -44,28 +50,50 @@ class Grid extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                        "Rating: 5",
-                        softWrap: true,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500),
-                      ),
-                    Padding(padding: EdgeInsets.fromLTRB(0, 0, 4.0, 0),),
-                    Icon(Icons.star, color: Colors.amber, size: 25.0,),
-                  ],
+                child: RatingBarIndicator(
+                  rating: rateConvert(cell.menurating),
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  itemCount: 5,
                 ),
               ),
               FlatButton(
-                onPressed: () {},
-                child: Text("Button"),
+                onPressed: () {share(context);},
+                child: Text("Share"),
                 textColor: Colors.black,
-                color: Colors.white,
+                color: Colors.blue,
               ),
+              /*Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Your Rating: ",
+                    style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+                  ),
+                  RatingBar.builder(
+                    minRating: 1,
+                    itemCount: 5,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    onRatingUpdate: (rating) {
+                      print(rating);
+                    },
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                  ),
+                ],
+              ),*/
             ],
           ),
         ));
+  }
+  void share(BuildContext context) {
+    final String msg =
+        "The Dish *${cell.menuTitle}*, from ACM is really good, you must try it.\n Try it Now : ${cell.menuImg}";
+    Share.share(msg);
   }
 }
