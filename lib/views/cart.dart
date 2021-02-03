@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:acm1/alerts/api_response.dart';
+import 'package:acm1/alerts/rateshare.dart';
 import 'package:acm1/apis/menu_services.dart';
 import 'package:acm1/listings/cart_listing.dart';
 import 'package:acm1/views/gridsview.dart';
@@ -15,11 +18,34 @@ class _CartState extends State<Cart> {
 
   APIResponse<List<CartListing>> _apiResponse;
   bool _isLoading = false;
+  int _counter;
+  Timer _timer;
 
   @override
   void initState() {
     _fetchCart();
+    _startTimer();
     super.initState();
+  }
+
+  void _startTimer() {
+    if(_timer != null){
+      _timer.cancel();
+    }
+    _counter = 5;
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if(_counter > 0){
+        setState(() {
+          _counter--;
+        });
+      }
+      else{
+        setState(() {
+          _timer.cancel();
+        });
+        showDialog(context: context, builder: (_) => RateShare());
+      }
+    });
   }
 
   _fetchCart() async {
@@ -67,14 +93,19 @@ class _CartState extends State<Cart> {
                   style: TextStyle(
                       color: Theme.of(context).primaryColor, fontSize: 20),
                 ),
-                subtitle: Text(
-                  "Portions : ${_apiResponse.data[index].portions} , Feature A : ${_apiResponse.data[index].feature}%",
+                subtitle: _counter>0? Text(
+                  "Portions : ${_apiResponse.data[index].portions} , Feature A : ${_apiResponse.data[index].feature}%"
+                      "\nTime Remaining : ${(_counter/60).ceil()} minutes",
                   style: TextStyle(
                       color: Theme.of(context).primaryColor, fontSize: 15),
                   // onTap: () {
                   // Navigator.of(context)
                   //   .push(MaterialPageRoute(builder: (_) => ChooseAction()));
                   // },
+                ) : Text(
+                  "Portions : ${_apiResponse.data[index].portions} , Feature A : ${_apiResponse.data[index].feature}%",
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor, fontSize: 15),
                 ),
               );
             },
