@@ -89,7 +89,7 @@ class MenuService {
 
   Future<APIResponse<List<CartListing>>> getCartList() {
     var data =
-        '{"query":"query MyQuery {\n  orders {\n    item_name\n    id\n    is_cooked\n   portions\n   feature\n}\n}\n","variables":null,"operationName":"MyQuery"}';
+        '{"query":"query MyQuery {\n  orders {\n    item_name\n    id\n    is_cooked\n   portions\n   feature\n    EndTime\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
     return http.post(API, headers: headers, body: data).then((ress) {
       if (ress.statusCode == 200) {
         final jsonDat = json.decode(ress.body);
@@ -109,7 +109,7 @@ class MenuService {
 
   Future<APIResponse<List<CookListing>>> getCookedList() {
     var datass =
-        '{"query":"query MyQuery {\n  orders {\n    item_name\n    id\n    is_cooked\n   portions\n}\n}\n","variables":null,"operationName":"MyQuery"}';
+        '{"query":"query MyQuery {\n  orders {\n    item_name\n    id\n    is_cooked\n   portions\n    EndTime\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
     return http.post(API, headers: headers, body: datass).then((resp) {
       if (resp.statusCode == 200) {
         final jsonDatas = json.decode(resp.body);
@@ -129,7 +129,7 @@ class MenuService {
 
   Future<APIResponse<bool>> createOrder(MenuInsert item) {
     var req =
-        '{"query":"mutation MyMutation {\\n  insert_orders(objects: {item_id: \\"${item.menuid}\\" , item_name: \\"${item.menuTitle}\\", machine_id: \\"7da727c4-87d4-428e-b72e-07505195e9c1\\", user_id: \\"7da727c4-87d4-428e-b72e-07505195e9c1\\", is_cooked: \\"false\\", portions: \\"${item.menuportions}\\", feature: \\"${item.menufeat}\\"}) {\\n    affected_rows\\n  }\\n}\\n","variables":null,"operationName":"MyMutation"}';
+        '{"query":"mutation MyMutation {\\n  insert_orders(objects: {item_id: \\"${item.menuid}\\" , item_name: \\"${item.menuTitle}\\", machine_id: \\"7da727c4-87d4-428e-b72e-07505195e9c1\\", user_id: \\"7da727c4-87d4-428e-b72e-07505195e9c1\\", is_cooked: \\"false\\", portions: \\"${item.menuportions}\\", feature: \\"${item.menufeat}\\", EndTime: \\"${item.menuTime}\\"}) {\\n    affected_rows\\n  }\\n}\\n","variables":null,"operationName":"MyMutation"}';
     return http.post(API, headers: headers, body: req).then((val) {
       if (val.statusCode == 200) {
         return APIResponse<bool>(data: true);

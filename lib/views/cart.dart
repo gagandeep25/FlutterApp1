@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:acm1/alerts/api_response.dart';
 import 'package:acm1/alerts/rateshare.dart';
 import 'package:acm1/apis/menu_services.dart';
 import 'package:acm1/listings/cart_listing.dart';
 import 'package:acm1/views/gridsview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:get_it/get_it.dart';
 
 class Cart extends StatefulWidget {
@@ -18,17 +17,19 @@ class _CartState extends State<Cart> {
 
   APIResponse<List<CartListing>> _apiResponse;
   bool _isLoading = false;
-  int _counter;
-  Timer _timer;
+  int time = 0;
+  //int _counter;
+  //Timer _timer;
+  List timeList = [];
 
   @override
   void initState() {
     _fetchCart();
-    _startTimer();
+    //_startTimer();
     super.initState();
   }
 
-  void _startTimer() {
+  /*void _startTimer() {
     if(_timer != null){
       _timer.cancel();
     }
@@ -46,7 +47,7 @@ class _CartState extends State<Cart> {
         showDialog(context: context, builder: (_) => RateShare());
       }
     });
-  }
+  }*/
 
   _fetchCart() async {
     setState(() {
@@ -54,6 +55,10 @@ class _CartState extends State<Cart> {
     });
 
     _apiResponse = await service.getCartList();
+
+    for (int i = 0; i < _apiResponse.data.length; i++) {
+      timeList.add(_apiResponse.data[i].endtime);
+    }
 
     setState(() {
       _isLoading = false;
@@ -93,7 +98,8 @@ class _CartState extends State<Cart> {
                   style: TextStyle(
                       color: Theme.of(context).primaryColor, fontSize: 20),
                 ),
-                subtitle: _counter>0? Text(
+                subtitle:
+                    /*_counter>0? Text(
                   "Portions : ${_apiResponse.data[index].portions} , Feature A : ${_apiResponse.data[index].feature}%"
                       "\nTime Remaining : ${(_counter/60).ceil()} minutes",
                   style: TextStyle(
@@ -102,10 +108,39 @@ class _CartState extends State<Cart> {
                   // Navigator.of(context)
                   //   .push(MaterialPageRoute(builder: (_) => ChooseAction()));
                   // },
-                ) : Text(
-                  "Portions : ${_apiResponse.data[index].portions} , Feature A : ${_apiResponse.data[index].feature}%",
-                  style: TextStyle(
-                      color: Theme.of(context).primaryColor, fontSize: 15),
+                ) :*/
+                    Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Portions : ${_apiResponse.data[index].portions} , Feature A : ${_apiResponse.data[index].feature}%",
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor, fontSize: 15),
+                    ),
+                    CountdownTimer(
+                      endTime: timeList[index],
+                      onEnd: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => RateShare(
+                                  menuTitle:
+                                      _apiResponse.data[index].orderTitle,
+                                ));
+                      },
+                      widgetBuilder: (_, time) {
+                        if (time == null) {
+                          return Container();
+                        } else {
+                          return Text(
+                            "Time remaining : ${time.min == null ? "${1} minute" : "${time.min + 1} minutes"}",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 15),
+                          );
+                        }
+                      },
+                    )
+                  ],
                 ),
               );
             },

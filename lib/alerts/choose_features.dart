@@ -162,7 +162,9 @@ class _ChooseFeatureState extends State<ChooseFeature> {
                       menuTitle: widget.menuTitle,
                       menuid: widget.menuID,
                       menuportions: _counter,
-                      menufeat: _currentSliderValueA);
+                      menufeat: _currentSliderValueA,
+                      menuTime:
+                          DateTime.now().millisecondsSinceEpoch + 1000 * 30);
 
                   final result = await menuService.createOrder(notes);
                   final title = 'Done';

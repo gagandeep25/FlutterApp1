@@ -4,13 +4,15 @@ class CartListing {
   bool orderstatus;
   int portions;
   int feature;
+  int endtime;
 
   CartListing(
       {this.orderID,
       this.orderTitle,
       this.orderstatus,
       this.portions,
-      this.feature});
+      this.feature,
+      this.endtime});
 
   factory CartListing.fromJson(Map<String, dynamic> item) {
     {
@@ -19,7 +21,8 @@ class CartListing {
           orderTitle: item['item_name'],
           orderstatus: item['is_cooked'],
           portions: item['portions'],
-          feature: item['feature']);
+          feature: item['feature'],
+          endtime: item['EndTime']);
     }
   }
 }
