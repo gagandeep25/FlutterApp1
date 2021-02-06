@@ -13,7 +13,6 @@ class CartListing {
       this.feature});
 
   factory CartListing.fromJson(Map<String, dynamic> item) {
-    //if (item['is_cooked'] == false)
     {
       return CartListing(
           orderID: item['item_id'],

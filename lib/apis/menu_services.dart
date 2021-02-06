@@ -12,16 +12,16 @@ class MenuService {
   static const API = 'https://acmg90.herokuapp.com/v1/graphql';
   var headers = {
     'content-type': 'application/json',
-    'x-hasura-admin-secret': '****'
+    'x-hasura-admin-secret': 'acmcfi'
   };
 
   static Future<List<MenuForListing>> getMenu() async {
     var header = {
       'content-type': 'application/json',
-      'x-hasura-admin-secret': '****'
+      'x-hasura-admin-secret': 'acmcfi'
     };
     var sun =
-        '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
+        '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n    rating\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
 
     try {
       final response = await http.post(API, headers: header, body: sun);
@@ -71,7 +71,7 @@ class MenuService {
 
   Future<APIResponse<List<MenuForListing>>> getMenuList() {
     var data =
-        '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n    imagelocal\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
+        '{"query":"query MyQuery {\n  items {\n    name\n    id\n    image\n    index\n    imagelocal\n    rating\n  }\n}\n","variables":null,"operationName":"MyQuery"}';
     return http.post(API, headers: headers, body: data).then((res) {
       if (res.statusCode == 200) {
         final jsonDatas = json.decode(res.body);

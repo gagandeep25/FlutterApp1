@@ -4,14 +4,15 @@ import 'package:acm1/views/gridsview.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
+import 'package:share/share.dart';
+//import 'package:flutter_share_file/flutter_share_file.dart';
 
 class ChooseFeature extends StatefulWidget {
   final String menuID;
   final String menuTitle;
-  ChooseFeature({
-    this.menuID,
-    this.menuTitle,
-  });
+  final String img;
+  final String imgloc;
+  ChooseFeature({this.menuID, this.menuTitle, this.img, this.imgloc});
 
   @override
   _ChooseFeatureState createState() => _ChooseFeatureState();
@@ -72,22 +73,34 @@ class _ChooseFeatureState extends State<ChooseFeature> {
         title: Column(
           children: <Widget>[
             Container(
-              child:
-                  Text('Choose portions for ${widget.menuTitle} : $_counter'),
+              child: Text('Choose portions for ${widget.menuTitle}:'),
             ),
             SizedBox(height: 15.0),
-            FlatButton(
-              child: Text('Increase  + ', style: TextStyle(fontSize: 21)),
-              onPressed: () {
-                _incrementCouter();
-              },
-            ),
-            SizedBox(height: 10.0),
-            FlatButton(
-              child: Text('Reduce -', style: TextStyle(fontSize: 21)),
-              onPressed: () {
-                _decrementCouter();
-              },
+            Padding(
+              padding: const EdgeInsets.only(left: 60.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons
+                        .arrow_upward), //Text('Increase (+)', style: TextStyle(fontSize: 15))
+
+                    //Icons.ac_unit,
+                    onPressed: () {
+                      _incrementCouter();
+                    },
+                  ),
+                  Container(
+                    child: Text('$_counter'),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons
+                        .arrow_downward), //Text('Reduce (-)', style: TextStyle(fontSize: 15)),
+                    onPressed: () {
+                      _decrementCouter();
+                    },
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 30.0),
             Container(
@@ -170,7 +183,18 @@ class _ChooseFeatureState extends State<ChooseFeature> {
                                             builder: (context) => GridsView()),
                                         (Route<dynamic> route) => false);
                                   },
-                                  child: Text('OK'))
+                                  child: Text('OK')),
+                              FlatButton(
+                                  child: Text('Share',
+                                      style: TextStyle(fontSize: 18)),
+                                  onPressed: () {
+                                    share(context);
+
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => GridsView()),
+                                        (Route<dynamic> route) => false);
+                                  }),
                             ],
                           )).then((data) {
                     if (result.data) {
@@ -194,8 +218,14 @@ class _ChooseFeatureState extends State<ChooseFeature> {
                 child: Text('Cancel', style: TextStyle(fontSize: 18)),
                 onPressed: () {
                   Navigator.of(context).pop();
-                })
+                }),
           ],
         ));
+  }
+
+  void share(BuildContext context) {
+    final String msg =
+        "The Dish *${widget.menuTitle}*, from ACM is really good, you must try it.\n Try it Now : ${widget.img}";
+    Share.share(msg);
   }
 }

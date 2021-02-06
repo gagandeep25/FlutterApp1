@@ -14,8 +14,9 @@ import 'package:intro_slider/slide_object.dart';
 
 class MenuList extends StatefulWidget {
   final int ind;
+  final String img;
 
-  MenuList({this.ind});
+  MenuList({this.ind, this.img});
 
   @override
   _MenuListState createState() => _MenuListState();
@@ -84,8 +85,11 @@ class _MenuListState extends State<MenuList> {
     showDialog(
         context: context,
         builder: (_) => ChooseFeature(
-            menuID: _menuResponse.data[widget.ind].menuID,
-            menuTitle: _menuResponse.data[widget.ind].menuTitle));
+              menuID: _menuResponse.data[widget.ind].menuID,
+              menuTitle: _menuResponse.data[widget.ind].menuTitle,
+              img: widget.img,
+              imgloc: images[widget.ind],
+            ));
   }
 
   void onTabChangeCompleted(index) {
@@ -160,6 +164,14 @@ class _MenuListState extends State<MenuList> {
                 labelStyle: TextStyle(fontSize: 18.0),
                 onTap: () =>
                     showDialog(context: context, builder: (_) => LogOut())),
+            /*  SpeedDialChild(
+                child: Icon(Icons.message),
+                backgroundColor: Colors.blue,
+                label: 'Share',
+                labelStyle: TextStyle(fontSize: 18.0),
+                onTap: () {
+                  AdvancedShare.whatsapp(msg: "Hi");
+                }), */
           ],
         ),
         body: Builder(builder: (_) {

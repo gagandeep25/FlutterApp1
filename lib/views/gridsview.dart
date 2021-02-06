@@ -24,7 +24,7 @@ class GridsViewState extends State<GridsView> {
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         childAspectRatio: 1.0,
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
