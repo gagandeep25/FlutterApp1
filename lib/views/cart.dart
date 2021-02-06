@@ -118,7 +118,8 @@ class _CartState extends State<Cart> {
                           color: Theme.of(context).primaryColor, fontSize: 15),
                     ),
                     CountdownTimer(
-                      endTime: timeList[index],
+                      endTime:
+                          DateTime.now().millisecondsSinceEpoch + 1000 * 45,
                       onEnd: () {
                         showDialog(
                             context: context,
