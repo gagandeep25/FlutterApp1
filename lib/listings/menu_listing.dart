@@ -4,7 +4,7 @@ class MenuForListing {
   String menuImg;
   int menuInd;
   String menImgloc;
-  double menurating;
+  int menurating;
 
   MenuForListing(
       {this.menuID,
@@ -21,6 +21,6 @@ class MenuForListing {
         menuImg: items["image"] as String,
         menuInd: items["index"] as int,
         menImgloc: items["imagelocal"] as String,
-        menurating: items["rating"] as double);
+        menurating: items["rating"] as int);
   }
 }

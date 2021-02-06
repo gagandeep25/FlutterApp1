@@ -8,6 +8,11 @@ class Grid extends StatelessWidget {
   @required
   final MenuForListing cell;
 
+  double rateConvert(int rating) {
+    double x = rating.toDouble();
+    return x / 2;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -46,7 +51,7 @@ class Grid extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 10.0),
                 child: RatingBarIndicator(
-                  rating: cell.menurating,
+                  rating: rateConvert(cell.menurating),
                   itemBuilder: (context, index) => Icon(
                     Icons.star,
                     color: Colors.amber,
@@ -91,7 +96,7 @@ class Grid extends StatelessWidget {
 
   void share(BuildContext context) {
     final String msg =
-        "The Dish ${cell.menuTitle}, from ACM is really good, you must try it.\n Try it Now : ${cell.menuImg}";
+        "The Dish *${cell.menuTitle}*, from ACM is really good, you must try it.\n Try it Now : ${cell.menuImg}";
     Share.share(msg);
   }
 }
