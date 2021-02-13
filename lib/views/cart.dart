@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:acm1/alerts/api_response.dart';
 import 'package:acm1/alerts/rateshare.dart';
 import 'package:acm1/apis/menu_services.dart';
@@ -18,8 +17,10 @@ class _CartState extends State<Cart> {
 
   APIResponse<List<CartListing>> _apiResponse;
   bool _isLoading = false;
+  int time = 0;
   //int _counter;
   //Timer _timer;
+  List timeList = [];
 
   @override
   void initState() {
@@ -54,6 +55,10 @@ class _CartState extends State<Cart> {
     });
 
     _apiResponse = await service.getCartList();
+
+    for (int i = 0; i < _apiResponse.data.length; i++) {
+      timeList.add(_apiResponse.data[i].endtime);
+    }
 
     setState(() {
       _isLoading = false;
@@ -93,7 +98,8 @@ class _CartState extends State<Cart> {
                   style: TextStyle(
                       color: Theme.of(context).primaryColor, fontSize: 20),
                 ),
-                subtitle: /*_counter>0? Text(
+                subtitle:
+                    /*_counter>0? Text(
                   "Portions : ${_apiResponse.data[index].portions} , Feature A : ${_apiResponse.data[index].feature}%"
                       "\nTime Remaining : ${(_counter/60).ceil()} minutes",
                   style: TextStyle(
@@ -102,7 +108,8 @@ class _CartState extends State<Cart> {
                   // Navigator.of(context)
                   //   .push(MaterialPageRoute(builder: (_) => ChooseAction()));
                   // },
-                ) :*/ Column(
+                ) :*/
+                    Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -111,19 +118,26 @@ class _CartState extends State<Cart> {
                           color: Theme.of(context).primaryColor, fontSize: 15),
                     ),
                     CountdownTimer(
-                      endTime: DateTime.now().millisecondsSinceEpoch + 1000*5,
+                      endTime:
+                          DateTime.now().millisecondsSinceEpoch + 1000 * 45,
                       onEnd: () {
-                        showDialog(context: context,
-                        builder: (_) => RateShare(menuTitle: _apiResponse.data[index].orderTitle,));
+                        showDialog(
+                            context: context,
+                            builder: (_) => RateShare(
+                                  menuTitle:
+                                      _apiResponse.data[index].orderTitle,
+                                ));
                       },
                       widgetBuilder: (_, time) {
-                        if(time == null){
+                        if (time == null) {
                           return Container();
-                        }
-                        else{
-                          return Text("Time remaining : ${time.min==null? "${1} minute":"${time.min+1} minutes"}",
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor, fontSize: 15),);
+                        } else {
+                          return Text(
+                            "Time remaining : ${time.min == null ? "${1} minute" : "${time.min + 1} minutes"}",
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 15),
+                          );
                         }
                       },
                     )

@@ -8,9 +8,9 @@ class Grid extends StatelessWidget {
   @required
   final MenuForListing cell;
 
-  double rateConvert(int rating){
+  double rateConvert(int rating) {
     double x = rating.toDouble();
-    return x/2;
+    return x / 2;
   }
 
   @override
@@ -60,7 +60,9 @@ class Grid extends StatelessWidget {
                 ),
               ),
               FlatButton(
-                onPressed: () {share(context);},
+                onPressed: () {
+                  share(context);
+                },
                 child: Text("Share"),
                 textColor: Colors.black,
                 color: Colors.blue,
@@ -91,6 +93,7 @@ class Grid extends StatelessWidget {
           ),
         ));
   }
+
   void share(BuildContext context) {
     final String msg =
         "The Dish *${cell.menuTitle}*, from ACM is really good, you must try it.\n Try it Now : ${cell.menuImg}";

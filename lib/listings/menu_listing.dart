@@ -8,11 +8,11 @@ class MenuForListing {
 
   MenuForListing(
       {this.menuID,
-        this.menuTitle,
-        this.menuImg,
-        this.menuInd,
-        this.menImgloc,
-        this.menurating});
+      this.menuTitle,
+      this.menuImg,
+      this.menuInd,
+      this.menImgloc,
+      this.menurating});
 
   factory MenuForListing.fromJson(Map<String, dynamic> items) {
     return MenuForListing(

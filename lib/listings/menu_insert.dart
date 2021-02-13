@@ -5,19 +5,22 @@ class MenuInsert {
   String menuid;
   int menuportions;
   double menufeat;
+  int menuTime;
 
   MenuInsert(
       {@required this.menuTitle,
       @required this.menuid,
       @required this.menuportions,
-      @required this.menufeat});
+      @required this.menufeat,
+      @required this.menuTime});
 
   Map<String, dynamic> toJson() {
     return {
       'item_name': menuTitle,
       'item_id': menuid,
       'portions': menuportions,
-      'feature': menufeat
+      'feature': menufeat,
+      'EndTime': menuTime
     };
   }
 }
