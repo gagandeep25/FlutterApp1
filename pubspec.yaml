@@ -40,6 +40,7 @@ dependencies:
   page_slider: ^0.0.2
   share: ^0.6.2+3
   flutter_rating_bar: ^3.2.0+1
+  flutter_countdown_timer: ^3.0.0
 
   
 
