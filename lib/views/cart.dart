@@ -17,6 +17,7 @@ class _CartState extends State<Cart> {
 
   APIResponse<List<CartListing>> _apiResponse;
   bool _isLoading = false;
+  bool _dialogOpened = false;
   int time = 0;
   //int _counter;
   //Timer _timer;
@@ -119,14 +120,28 @@ class _CartState extends State<Cart> {
                     ),
                     CountdownTimer(
                       endTime:
-                          DateTime.now().millisecondsSinceEpoch + 1000 * 45,
+                          timeList[index],
                       onEnd: () {
-                        showDialog(
-                            context: context,
-                            builder: (_) => RateShare(
+                        if(!_dialogOpened) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            setState(() {
+                              _dialogOpened = true;
+                            });
+                            showDialog(
+                                context: context,
+                                builder: (_) => RateShare(
                                   menuTitle:
-                                      _apiResponse.data[index].orderTitle,
+                                  _apiResponse.data[index].orderTitle,
                                 ));
+                            setState(() {
+                              _dialogOpened = true;
+                            });
+                          });
+                          print("${_apiResponse.data[index].orderTitle} $_dialogOpened");
+                        }
+                        else{
+                          print("${_apiResponse.data[index].orderTitle} Working properly");
+                        }
                       },
                       widgetBuilder: (_, time) {
                         if (time == null) {
