@@ -17,7 +17,7 @@ class _CartState extends State<Cart> {
 
   APIResponse<List<CartListing>> _apiResponse;
   bool _isLoading = false;
-  bool _dialogOpened = false;
+  List<bool> _dialogOpened = [];
   int time = 0;
   //int _counter;
   //Timer _timer;
@@ -59,6 +59,7 @@ class _CartState extends State<Cart> {
 
     for (int i = 0; i < _apiResponse.data.length; i++) {
       timeList.add(_apiResponse.data[i].endtime);
+      _dialogOpened.add(false);
     }
 
     setState(() {
@@ -122,10 +123,10 @@ class _CartState extends State<Cart> {
                       endTime:
                           timeList[index],
                       onEnd: () {
-                        if(!_dialogOpened) {
+                        if(!_dialogOpened[index]) {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             setState(() {
-                              _dialogOpened = true;
+                              _dialogOpened[index] = true;
                             });
                             showDialog(
                                 context: context,
@@ -134,13 +135,9 @@ class _CartState extends State<Cart> {
                                   _apiResponse.data[index].orderTitle,
                                 ));
                             setState(() {
-                              _dialogOpened = true;
+                              _dialogOpened[index] = true;
                             });
                           });
-                          print("${_apiResponse.data[index].orderTitle} $_dialogOpened");
-                        }
-                        else{
-                          print("${_apiResponse.data[index].orderTitle} Working properly");
                         }
                       },
                       widgetBuilder: (_, time) {
